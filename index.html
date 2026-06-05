@@ -426,7 +426,7 @@
 <header>
   <h1>My US Adventure Guide</h1>
   <div class="subtitle">Southwest Road Trip · Places to Visit</div>
-  <div class="count">100+ destinations · Tap any place to open in Maps</div>
+  <div class="count">100+ destinations · Tap any place name to open in Maps</div>
 </header>
 
 <div class="state-nav">
@@ -554,8 +554,67 @@
           </div>
           <div class="place-description">Fascinating land art, but requires 2.5h from SLC on rough roads — only if you appreciate art/photography.</div>
       </div>
-
+      <div class="place-item">
+        <span class="place-icon">⛷️</span>
+        <div class="place-info"><div class="place-name"><a class="place-link" href="maps://?q=Big+Cottonwood+Canyon+Utah" target="_blank">Big Cottonwood Canyon</a></div><div class="place-note">Ski, Wasatch Mountains, Donut Fall (waterfall with ice)</div></div>
+      
+          <div class="place-controls">
+            <div class="stars">
+              <span class="star-full">★</span>
+              <span class="star-empty">★</span>
+              <span class="star-empty">★</span>
+            </div>
+            <select class="status-select unknown" data-id="big-cottonwood-canyon" onchange="saveStatus(this)">
+              <option value="unknown">?</option>
+              <option value="planned">Planned</option>
+              <option value="notplanned">Not Planned</option>
+              <option value="visited">Visited !</option>
+            </select>
+          </div>
+          <div class="place-description">Beautiful but you'll see more dramatic landscapes elsewhere on this trip.</div>
       </div>
+
+      <div class="place-item">
+        <span class="place-icon">🐴</span>
+        <div class="place-info"><div class="place-name"><a class="place-link" href="https://maps.apple.com/?address=Forest%20Service%20Road%2054,%20Hyrum,%20UT%20%2084319,%20United%20States&auid=7669724410706414783&ll=41.599687,-111.566634&lsp=9902&q=Hardware%20Ranch%20WMA" target="_blank">Hardware ranch Elk viewing</a></div><div class="place-note">Elk migration, Sleigh</div></div>
+      
+          <div class="place-controls">
+            <div class="stars">
+              <span class="star-full">★</span>
+              <span class="star-empty">★</span>
+              <span class="star-empty">★</span>
+            </div>
+            <select class="status-select unknown" data-id="hardware-ranch-elk-viewing" onchange="saveStatus(this)">
+              <option value="unknown">?</option>
+              <option value="planned">Planned</option>
+              <option value="notplanned">Not Planned</option>
+              <option value="visited">Visited !</option>
+            </select>
+          </div>
+          <div class="place-description">Very seasonal (winter only for sleigh rides), niche interest.</div>
+      </div>
+
+      <div class="place-item">
+        <span class="place-icon">🦇</span>
+        <div class="place-info"><div class="place-name"><a class="place-link" href="maps://?q=Timpanogos+Cave+National+Monument+Utah" target="_blank">Timpanogos Cave</a></div></div>
+      
+          <div class="place-controls">
+            <div class="stars">
+              <span class="star-full">★</span>
+              <span class="star-empty">★</span>
+              <span class="star-empty">★</span>
+            </div>
+            <select class="status-select unknown" data-id="timpanogos-cave" onchange="saveStatus(this)">
+              <option value="unknown">?</option>
+              <option value="planned">Planned</option>
+              <option value="notplanned">Not Planned</option>
+              <option value="visited">Visited !</option>
+            </select>
+          </div>
+          <div class="place-description">Nice cave tour but minor compared to the rest.</div>
+      </div>
+
+    </div>
 
       <!-- MIDWAY -->
       <div id="utah-midway">
@@ -598,6 +657,26 @@
             </select>
           </div>
           <div class="place-description">If visiting in winter, spectacular. Skip in other seasons.</div>
+      </div>
+
+      <div class="place-item">
+        <span class="place-icon">♨️</span>
+        <div class="place-info"><div class="place-name"><a class="place-link" href="maps://?q=Fifth+Water+Hot+Springs+Utah" target="_blank">Fifth Water Hot Springs</a></div></div>
+      
+          <div class="place-controls">
+            <div class="stars">
+              <span class="star-full">★</span>
+              <span class="star-full">★</span>
+              <span class="star-empty">★</span>
+            </div>
+            <select class="status-select unknown" data-id="fifth-water-hot-springs" onchange="saveStatus(this)">
+              <option value="unknown">?</option>
+              <option value="planned">Planned</option>
+              <option value="notplanned">Not Planned</option>
+              <option value="visited">Visited !</option>
+            </select>
+          </div>
+          <div class="place-description">Beautiful colored hot springs in a canyon, worth the hike.</div>
       </div>
 
       </div>
@@ -645,6 +724,25 @@
           </div>
           <div class="place-description">Vast and dramatic — Mesa Arch sunrise is one of the most photographed spots in the world.</div>
       </div>         
+      <div class="place-item">
+        <span class="place-icon">🐴</span>
+        <div class="place-info"><div class="place-name"><a class="place-link" href="maps://?q=Dead+Horse+Point+State+Park+Utah" target="_blank">Potash Road Scenic Drive</a></div></div>
+      
+          <div class="place-controls">
+            <div class="stars">
+              <span class="star-full">★</span>
+              <span class="star-full">★</span>
+              <span class="star-full">★</span>
+            </div>
+            <select class="status-select unknown" data-id="potash-road-scenic-drive" onchange="saveStatus(this)">
+              <option value="unknown">?</option>
+              <option value="planned">Planned</option>
+              <option value="notplanned">Not Planned</option>
+              <option value="visited">Visited !</option>
+            </select>
+          </div>
+          <div class="place-description">Jaw-dropping Colorado River overlook, easy add-on to Canyonlands.</div>
+      </div>
          
       </div>
 
@@ -779,7 +877,82 @@
           </div>
           <div class="place-description">The most underrated of Utah's Mighty 5, stunning and uncrowded.</div>
       </div>    
-
+      <div class="place-item">
+        <span class="place-icon">🌙</span>
+        <div class="place-info"><div class="place-name"><a class="place-link" href="maps://?q=Moonscape+Overlook+Utah" target="_blank">Moonscape Overlook</a></div><div class="place-note">Hanksville area</div></div>
+      
+          <div class="place-controls">
+            <div class="stars">
+              <span class="star-full">★</span>
+              <span class="star-full">★</span>
+              <span class="star-empty">★</span>
+            </div>
+            <select class="status-select unknown" data-id="moonscape-overlook" onchange="saveStatus(this)">
+              <option value="unknown">?</option>
+              <option value="planned">Planned</option>
+              <option value="notplanned">Not Planned</option>
+              <option value="visited">Visited !</option>
+            </select>
+          </div>
+          <div class="place-description">Eerie, remote, spectacular views.</div>
+      </div>
+      <div class="place-item">
+        <span class="place-icon">🌈</span>
+        <div class="place-info"><div class="place-name"><a class="place-link" href="maps://?q=Bentonite+Hills+Utah" target="_blank">Bentonite Hills</a></div></div>
+      
+          <div class="place-controls">
+            <div class="stars">
+              <span class="star-full">★</span>
+              <span class="star-full">★</span>
+              <span class="star-empty">★</span>
+            </div>
+            <select class="status-select unknown" data-id="bentonite-hills" onchange="saveStatus(this)">
+              <option value="unknown">?</option>
+              <option value="planned">Planned</option>
+              <option value="notplanned">Not Planned</option>
+              <option value="visited">Visited !</option>
+            </select>
+          </div>
+          <div class="place-description">Pastel colored hills, very photogenic and unusual.</div>
+      </div>
+      <div class="place-item">
+        <span class="place-icon">🏭</span>
+        <div class="place-info"><div class="place-name"><a class="place-link" href="maps://?q=Factory+Butte+Utah" target="_blank">Factory Butte</a></div></div>
+      
+          <div class="place-controls">
+            <div class="stars">
+              <span class="star-full">★</span>
+              <span class="star-full">★</span>
+              <span class="star-empty">★</span>
+            </div>
+            <select class="status-select unknown" data-id="factory-butte" onchange="saveStatus(this)">
+              <option value="unknown">?</option>
+              <option value="planned">Planned</option>
+              <option value="notplanned">Not Planned</option>
+              <option value="visited">Visited !</option>
+            </select>
+          </div>
+          <div class="place-description">Dramatic isolated butte in a moonscape, great for off-road.</div>
+      </div>
+      <div class="place-item">
+        <span class="place-icon">☀️</span>
+        <div class="place-info"><div class="place-name"><a class="place-link" href="maps://?q=Temple+of+the+Sun+Capitol+Reef+Utah" target="_blank">Temple of the Sun and Moon, Glass mountain</a></div></div>
+      
+          <div class="place-controls">
+            <div class="stars">
+              <span class="star-full">★</span>
+              <span class="star-full">★</span>
+              <span class="star-empty">★</span>
+            </div>
+            <select class="status-select unknown" data-id="temple-of-the-sun-and-moon" onchange="saveStatus(this)">
+              <option value="unknown">?</option>
+              <option value="planned">Planned</option>
+              <option value="notplanned">Not Planned</option>
+              <option value="visited">Visited !</option>
+            </select>
+          </div>
+          <div class="place-description">Stunning towers and gypsum crystal made tower (short drive away) in Capitol Reef backcountry</div>
+      </div>
       </div>
 
       <!-- BOULDER -->
@@ -825,6 +998,44 @@
             </select>
           </div>
           <div class="place-description">Massive and wild — Peek-a-Boo slot canyon and Calf Creek Falls are world-class.</div>
+      </div>
+      <div class="place-item">
+        <span class="place-icon">🌌</span>
+        <div class="place-info"><div class="place-name"><a class="place-link" href="maps://?q=The+Cosmic+Ashtray+Colorado" target="_blank">The Cosmic Ashtray</a></div></div>
+      
+          <div class="place-controls">
+            <div class="stars">
+              <span class="star-full">★</span>
+              <span class="star-full">★</span>
+              <span class="star-full">★</span>
+            </div>
+            <select class="status-select unknown" data-id="the-cosmic-ashtray" onchange="saveStatus(this)">
+              <option value="unknown">?</option>
+              <option value="planned">Planned</option>
+              <option value="notplanned">Not Planned</option>
+              <option value="visited">Visited !</option>
+            </select>
+          </div>
+          <div class="place-description">Spectacular alien-like crater with pillar and vibrant orange sand</div>
+      </div>
+      <div class="place-item">
+        <span class="place-icon">✨</span>
+        <div class="place-info"><div class="place-name"><a class="place-link" href="maps://?q=Golden+Cathedral+Neon+Canyon+Utah" target="_blank">Golden Cathedral (Neon Canyon)</a></div><div class="place-note">Trou/arche, eau</div></div>
+      
+          <div class="place-controls">
+            <div class="stars">
+              <span class="star-full">★</span>
+              <span class="star-full">★</span>
+              <span class="star-empty">★</span>
+            </div>
+            <select class="status-select unknown" data-id="golden-cathedral-neon-canyon" onchange="saveStatus(this)">
+              <option value="unknown">?</option>
+              <option value="planned">Planned</option>
+              <option value="notplanned">Not Planned</option>
+              <option value="visited">Visited !</option>
+            </select>
+          </div>
+          <div class="place-description">Incredible arch with a waterfall through it, but requires a long backcountry hike.</div>
       </div>
              
       </div>
@@ -1203,25 +1414,7 @@
           <div class="place-description">Also far northeast, interesting fossils but niche.</div>
       </div>
 
-      <div class="place-item">
-        <span class="place-icon">🦇</span>
-        <div class="place-info"><div class="place-name"><a class="place-link" href="maps://?q=Timpanogos+Cave+National+Monument+Utah" target="_blank">Timpanogos Cave</a></div></div>
-      
-          <div class="place-controls">
-            <div class="stars">
-              <span class="star-full">★</span>
-              <span class="star-empty">★</span>
-              <span class="star-empty">★</span>
-            </div>
-            <select class="status-select unknown" data-id="timpanogos-cave" onchange="saveStatus(this)">
-              <option value="unknown">?</option>
-              <option value="planned">Planned</option>
-              <option value="notplanned">Not Planned</option>
-              <option value="visited">Visited !</option>
-            </select>
-          </div>
-          <div class="place-description">Nice cave tour but minor compared to the rest.</div>
-      </div>
+
 
       <div class="place-item">
         <span class="place-icon">🌊</span>
@@ -1243,25 +1436,6 @@
           <div class="place-description">Cool hidden gem near Page, quick stop if already there.</div>
       </div>
 
-      <div class="place-item">
-        <span class="place-icon">⛷️</span>
-        <div class="place-info"><div class="place-name"><a class="place-link" href="maps://?q=Big+Cottonwood+Canyon+Utah" target="_blank">Big Cottonwood Canyon</a></div><div class="place-note">Ski, Wasatch Mountains, Donut Fall (waterfall with ice)</div></div>
-      
-          <div class="place-controls">
-            <div class="stars">
-              <span class="star-full">★</span>
-              <span class="star-empty">★</span>
-              <span class="star-empty">★</span>
-            </div>
-            <select class="status-select unknown" data-id="big-cottonwood-canyon" onchange="saveStatus(this)">
-              <option value="unknown">?</option>
-              <option value="planned">Planned</option>
-              <option value="notplanned">Not Planned</option>
-              <option value="visited">Visited !</option>
-            </select>
-          </div>
-          <div class="place-description">Beautiful but you'll see more dramatic landscapes elsewhere on this trip.</div>
-      </div>
 
 
       <div class="place-item">
@@ -1284,145 +1458,6 @@
           <div class="place-description">Fun quirky bathtubs in nature, but less impressive than Fifth Water.</div>
       </div>
 
-      <div class="place-item">
-        <span class="place-icon">♨️</span>
-        <div class="place-info"><div class="place-name"><a class="place-link" href="maps://?q=Fifth+Water+Hot+Springs+Utah" target="_blank">Fifth Water Hot Springs</a></div></div>
-      
-          <div class="place-controls">
-            <div class="stars">
-              <span class="star-full">★</span>
-              <span class="star-full">★</span>
-              <span class="star-empty">★</span>
-            </div>
-            <select class="status-select unknown" data-id="fifth-water-hot-springs" onchange="saveStatus(this)">
-              <option value="unknown">?</option>
-              <option value="planned">Planned</option>
-              <option value="notplanned">Not Planned</option>
-              <option value="visited">Visited !</option>
-            </select>
-          </div>
-          <div class="place-description">Beautiful colored hot springs in a canyon, worth the hike.</div>
-      </div>
-
-      <div class="place-item">
-        <span class="place-icon">☀️</span>
-        <div class="place-info"><div class="place-name"><a class="place-link" href="maps://?q=Temple+of+the+Sun+Capitol+Reef+Utah" target="_blank">Temple of the Sun and Moon</a></div></div>
-      
-          <div class="place-controls">
-            <div class="stars">
-              <span class="star-full">★</span>
-              <span class="star-full">★</span>
-              <span class="star-empty">★</span>
-            </div>
-            <select class="status-select unknown" data-id="temple-of-the-sun-and-moon" onchange="saveStatus(this)">
-              <option value="unknown">?</option>
-              <option value="planned">Planned</option>
-              <option value="notplanned">Not Planned</option>
-              <option value="visited">Visited !</option>
-            </select>
-          </div>
-          <div class="place-description">Stunning towers in Capitol Reef backcountry.</div>
-      </div>
-
-      <div class="place-item">
-        <span class="place-icon">🏭</span>
-        <div class="place-info"><div class="place-name"><a class="place-link" href="maps://?q=Factory+Butte+Utah" target="_blank">Factory Butte</a></div></div>
-      
-          <div class="place-controls">
-            <div class="stars">
-              <span class="star-full">★</span>
-              <span class="star-full">★</span>
-              <span class="star-empty">★</span>
-            </div>
-            <select class="status-select unknown" data-id="factory-butte" onchange="saveStatus(this)">
-              <option value="unknown">?</option>
-              <option value="planned">Planned</option>
-              <option value="notplanned">Not Planned</option>
-              <option value="visited">Visited !</option>
-            </select>
-          </div>
-          <div class="place-description">Dramatic isolated butte in a moonscape, great for off-road.</div>
-      </div>
-
-      <div class="place-item">
-        <span class="place-icon">🌙</span>
-        <div class="place-info"><div class="place-name"><a class="place-link" href="maps://?q=Moonscape+Overlook+Utah" target="_blank">Moonscape Overlook</a></div><div class="place-note">Hanksville area</div></div>
-      
-          <div class="place-controls">
-            <div class="stars">
-              <span class="star-full">★</span>
-              <span class="star-full">★</span>
-              <span class="star-empty">★</span>
-            </div>
-            <select class="status-select unknown" data-id="moonscape-overlook" onchange="saveStatus(this)">
-              <option value="unknown">?</option>
-              <option value="planned">Planned</option>
-              <option value="notplanned">Not Planned</option>
-              <option value="visited">Visited !</option>
-            </select>
-          </div>
-          <div class="place-description">Eerie, remote, spectacular views.</div>
-      </div>
-
-      <div class="place-item">
-        <span class="place-icon">🌈</span>
-        <div class="place-info"><div class="place-name"><a class="place-link" href="maps://?q=Bentonite+Hills+Utah" target="_blank">Bentonite Hills</a></div></div>
-      
-          <div class="place-controls">
-            <div class="stars">
-              <span class="star-full">★</span>
-              <span class="star-full">★</span>
-              <span class="star-empty">★</span>
-            </div>
-            <select class="status-select unknown" data-id="bentonite-hills" onchange="saveStatus(this)">
-              <option value="unknown">?</option>
-              <option value="planned">Planned</option>
-              <option value="notplanned">Not Planned</option>
-              <option value="visited">Visited !</option>
-            </select>
-          </div>
-          <div class="place-description">Pastel colored hills, very photogenic and unusual.</div>
-      </div>
-
-      <div class="place-item">
-        <span class="place-icon">✨</span>
-        <div class="place-info"><div class="place-name"><a class="place-link" href="maps://?q=Golden+Cathedral+Neon+Canyon+Utah" target="_blank">Golden Cathedral (Neon Canyon)</a></div><div class="place-note">Trou/arche, eau</div></div>
-      
-          <div class="place-controls">
-            <div class="stars">
-              <span class="star-full">★</span>
-              <span class="star-full">★</span>
-              <span class="star-empty">★</span>
-            </div>
-            <select class="status-select unknown" data-id="golden-cathedral-neon-canyon" onchange="saveStatus(this)">
-              <option value="unknown">?</option>
-              <option value="planned">Planned</option>
-              <option value="notplanned">Not Planned</option>
-              <option value="visited">Visited !</option>
-            </select>
-          </div>
-          <div class="place-description">Incredible arch with a waterfall through it, but requires a long backcountry hike.</div>
-      </div>
-
-      <div class="place-item">
-        <span class="place-icon">🐴</span>
-        <div class="place-info"><div class="place-name"><a class="place-link" href="maps://?q=Dead+Horse+Point+State+Park+Utah" target="_blank">Potash Road Scenic Drive</a></div></div>
-      
-          <div class="place-controls">
-            <div class="stars">
-              <span class="star-full">★</span>
-              <span class="star-full">★</span>
-              <span class="star-full">★</span>
-            </div>
-            <select class="status-select unknown" data-id="potash-road-scenic-drive" onchange="saveStatus(this)">
-              <option value="unknown">?</option>
-              <option value="planned">Planned</option>
-              <option value="notplanned">Not Planned</option>
-              <option value="visited">Visited !</option>
-            </select>
-          </div>
-          <div class="place-description">Jaw-dropping Colorado River overlook, easy add-on to Canyonlands.</div>
-      </div>
 
       <div class="place-item">
         <span class="place-icon">🐴</span>
@@ -1444,25 +1479,7 @@
           <div class="place-description">Gateway town to Zion — worth a meal or sleep but not a destination itself.</div>
       </div>
 
-      <div class="place-item">
-        <span class="place-icon">🐴</span>
-        <div class="place-info"><div class="place-name"><a class="place-link" href="https://maps.apple.com/?address=Forest%20Service%20Road%2054,%20Hyrum,%20UT%20%2084319,%20United%20States&auid=7669724410706414783&ll=41.599687,-111.566634&lsp=9902&q=Hardware%20Ranch%20WMA" target="_blank">Hardware ranch Elk viewing</a></div><div class="place-note">Elk migration, Sleigh</div></div>
-      
-          <div class="place-controls">
-            <div class="stars">
-              <span class="star-full">★</span>
-              <span class="star-empty">★</span>
-              <span class="star-empty">★</span>
-            </div>
-            <select class="status-select unknown" data-id="hardware-ranch-elk-viewing" onchange="saveStatus(this)">
-              <option value="unknown">?</option>
-              <option value="planned">Planned</option>
-              <option value="notplanned">Not Planned</option>
-              <option value="visited">Visited !</option>
-            </select>
-          </div>
-          <div class="place-description">Very seasonal (winter only for sleigh rides), niche interest.</div>
-      </div>
+
 
     </div>
   </div>
@@ -2176,25 +2193,7 @@
           <div class="place-description"></div>
       </div>
 
-      <div class="place-item">
-        <span class="place-icon">🌌</span>
-        <div class="place-info"><div class="place-name"><a class="place-link" href="maps://?q=The+Cosmic+Ashtray+Colorado" target="_blank">The Cosmic Ashtray</a></div></div>
-      
-          <div class="place-controls">
-            <div class="stars">
-              <span class="star-empty">★</span>
-              <span class="star-empty">★</span>
-              <span class="star-empty">★</span>
-            </div>
-            <select class="status-select unknown" data-id="the-cosmic-ashtray" onchange="saveStatus(this)">
-              <option value="unknown">?</option>
-              <option value="planned">Planned</option>
-              <option value="notplanned">Not Planned</option>
-              <option value="visited">Visited !</option>
-            </select>
-          </div>
-          <div class="place-description"></div>
-      </div>
+
 
       <div class="place-item">
         <span class="place-icon">🛶</span>
