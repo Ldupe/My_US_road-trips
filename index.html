@@ -1,0 +1,1163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My US Adventure Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sand: #F5EDD8;
+    --rust: #C0522A;
+    --terracotta: #D4714A;
+    --sage: #7A8C6E;
+    --ink: #1C1A17;
+    --mist: #E8DFC8;
+    --cream: #FAF6EE;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+  }
+
+  header {
+    background: var(--ink);
+    color: var(--sand);
+    padding: 3rem 2rem 2.5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 40px,
+      rgba(255,255,255,0.02) 40px,
+      rgba(255,255,255,0.02) 80px
+    );
+  }
+
+  header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 6vw, 3.5rem);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    position: relative;
+  }
+
+  header .subtitle {
+    font-size: 0.85rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin-top: 0.75rem;
+    position: relative;
+  }
+
+  header .count {
+    display: inline-block;
+    margin-top: 1.5rem;
+    background: var(--rust);
+    color: white;
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.4rem 1rem;
+    border-radius: 2px;
+    position: relative;
+  }
+
+  .note {
+    background: var(--sage);
+    color: white;
+    text-align: center;
+    padding: 0.6rem 1rem;
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+  }
+
+  .note a { color: #d4f0c8; }
+
+  .container {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 2rem 1.25rem 4rem;
+  }
+
+  .state-section {
+    margin-bottom: 3rem;
+  }
+
+  .state-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid var(--ink);
+  }
+
+  .state-flag {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+  }
+
+  .state-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+
+  .state-count {
+    margin-left: auto;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #888;
+    white-space: nowrap;
+  }
+
+  .places-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .place-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    background: white;
+    border: 1px solid var(--mist);
+    border-radius: 6px;
+    transition: all 0.18s ease;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+  }
+
+  .place-item:hover {
+    border-color: var(--terracotta);
+    background: var(--sand);
+    transform: translateX(3px);
+  }
+
+  .place-icon {
+    font-size: 1rem;
+    margin-top: 1px;
+    flex-shrink: 0;
+  }
+
+  .place-info { flex: 1; min-width: 0; }
+
+  .place-name {
+    font-size: 0.92rem;
+    font-weight: 500;
+    line-height: 1.3;
+  }
+
+  .place-note {
+    font-size: 0.75rem;
+    color: #888;
+    margin-top: 0.15rem;
+    line-height: 1.4;
+  }
+
+  .map-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--rust);
+    white-space: nowrap;
+    flex-shrink: 0;
+    font-weight: 500;
+    padding: 0.25rem 0.5rem;
+    border: 1px solid var(--terracotta);
+    border-radius: 3px;
+    background: transparent;
+    text-decoration: none;
+    transition: background 0.15s;
+  }
+
+  .map-btn:hover {
+    background: var(--rust);
+    color: white;
+    border-color: var(--rust);
+  }
+
+  /* State colors */
+  .utah .state-flag { background: #da2b74; color: white; }
+  .arizona .state-flag { background: #B22234; color: #FFD700; }
+  .nevada .state-flag { background: #003366; color: #C0C0C0; }
+  .colorado .state-flag { background: #338a16; color: #FFD700; }
+  .idaho .state-flag { background: #006400; color: white; }
+  .alaska .state-flag { background: #74baff; color: #FFD700; }
+  .california .state-flag { background: #d49c01; color: #C0C0C0; }
+  .ressources .state-flag { background: #0ebe92; color: #FFD700; }
+
+  footer {
+    text-align: center;
+    padding: 2rem;
+    font-size: 0.75rem;
+    color: #aaa;
+    border-top: 1px solid var(--mist);
+  }
+
+  @media (max-width: 500px) {
+    .place-item { padding: 0.65rem 0.75rem; }
+    .map-btn { display: none; }
+  }
+
+  /* Nav buttons */
+
+  .state-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    justify-content: center;
+    padding: 1.25rem 1.25rem;
+    background: var(--mist);
+    border-bottom: 1px solid #d8cdb0;
+  }
+
+  .state-nav a {
+    text-decoration: none;
+    background: white;
+    color: var(--ink);
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.45rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    transition: all 0.15s ease;
+  }
+
+  .state-nav a:hover {
+    background: var(--rust);
+    color: white;
+    border-color: var(--rust);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  #topBtn {
+    display: none;
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    background: var(--rust);
+    color: white;
+    text-decoration: none;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.6rem 1rem;
+    border-radius: 3px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    transition: background 0.15s;
+    align-items: center;
+    gap: 0.3rem;
+    z-index: 999;
+  }
+
+  #topBtn:hover {
+    background: var(--ink);
+  }
+
+  .subsection-nav {
+    display: none;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    padding: 0.6rem 1.25rem 0.9rem;
+    background: var(--mist);
+    border-bottom: 1px solid #d8cdb0;
+    justify-content: center;
+  }
+
+  .subsection-nav a {
+    text-decoration: none;
+    background: var(--sand);
+    color: var(--ink);
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    transition: all 0.15s ease;
+  }
+
+  .subsection-nav a:hover {
+    background: var(--terracotta);
+    color: white;
+    border-color: var(--terracotta);
+  }
+
+  .subsection-nav.open {
+    display: flex;
+  }
+
+  .subsection-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin: 1.5rem 0 0.5rem;
+    padding-bottom: 0.3rem;
+    border-bottom: 1px dashed #ccc;
+    color: var(--rust);
+  }
+
+  /*[id] {
+    scroll-margin-top: 20px;
+  }*/
+  #utah, #arizona, #nevada, #colorado, #idaho, #alaska, #california, #ressources {
+    scroll-margin-top: 20px;
+  }
+
+  .stars {
+    display: flex;
+    gap: 0.15rem;
+    flex-shrink: 0;
+    align-items: center;
+  }
+
+  .star-full { color: var(--rust); }
+  .star-empty { color: #ccc; }
+  
+</style>
+</head>
+<body>
+
+<script>
+  window.onload = () => setTimeout(() => window.scrollTo(0, 0), 50);
+</script>
+
+<header>
+  <h1>My US Adventure Guide</h1>
+  <div class="subtitle">Southwest Road Trip · Places to Visit</div>
+  <div class="count">100+ destinations · Tap any place to open in Maps</div>
+</header>
+
+<div class="state-nav">
+  <!--<a href="#utah"       onclick="toggleSub('sub-utah')"       >🏜️ Utah</a>-->
+  <!--<a href="#arizona"    onclick="toggleSub('sub-arizona')"    >☀️ Arizona</a>-->
+  <a onclick="toggleSub('sub-utah', event)"       >🏜️ Utah</a>
+  <a onclick="toggleSub('sub-arizona', event)"    >☀️ Arizona</a>
+  <a href="#nevada"     onclick="toggleSub('sub-nevada')"     >🎰 Nevada</a>
+  <a href="#colorado"   onclick="toggleSub('sub-colorado')"   >🏔️ Colorado</a>
+  <a href="#idaho"      onclick="toggleSub('sub-idaho')"      >🥔 Idaho</a>
+  <a href="#alaska"     onclick="toggleSub('sub-alaska')"     >🛶 Alaska</a>
+  <a href="#california" onclick="toggleSub('sub-california')" >🏄 California</a>
+  <a href="#ressources" onclick="toggleSub('sub-ressources')" >📔 Resources</a>
+</div>
+
+<!-- one subsection bar per state, hidden by default -->
+<div class="subsection-nav" id="sub-utah">
+  <a href="#utah">🏜️ See all</a>
+  <a href="#utah-salt-lake-city">🏛️ Salt Lake City</a>
+  <a href="#utah-midway">♨️ Midway</a>
+  <a href="#utah-moab">🏜️ Moab</a>
+  <a href="#utah-mexican-hat">👒 Mexican Hat</a>
+  <a href="#utah-hanksville-torrey">🏜️ Hanksville - Torrey</a>
+  <a href="#utah-boulder">🏜️ Boulder</a>
+  <a href="#utah-kanab-springdale">🏜️ Kanab - Springdale</a>
+  <a href="#utah-others">🏜️ Others</a>
+
+</div>
+
+
+<div class="subsection-nav" id="sub-arizona">
+  <a href="#arizona">🏜️ See all</a>
+  <a href="#arizona-page">🏜️ Page</a>
+  <a href="#arizona-flagstaff">💧 Flagstaff</a>
+  <a href="#arizona-sedona">🔴 Sedona</a>
+  <a href="#arizona-others">🔴 Others</a>
+</div>
+
+<!-- add more per state as needed -->
+
+<div class="container">
+
+  
+  <!--------------------------------------------      --------------------------------------------->
+  <!-------------------------------------------- UTAH --------------------------------------------->
+  <!--------------------------------------------      --------------------------------------------->
+
+  <div class="state-section utah" id="utah">
+    <div class="state-header">
+      <div class="state-flag">🏜️</div>
+      <div class="state-name">Utah</div>
+      <div class="state-count">40 places</div>
+    </div>
+    <div class="places-list">
+
+
+      <!-- SALT LAKE CITY -->
+      <div id="utah-salt-lake-city">
+        <div class="subsection-title">🏛️ Salt Lake City</div>
+        <!-- place items here -->
+
+        <a class="place-item" href="https://maps.apple.com/?address=Howell,%20UT%20%2084316,%20United%20States&auid=3617351628495618246&ll=41.437655,-112.668861&lsp=9902&q=Spiral%20Jetty" target="_blank">
+          <span class="place-icon">🌀</span>
+          <div class="place-info"><div class="place-name">Spiral Jetty</div><div class="place-note">See / swim Pink lake and salt flats, Train Monument</div></div>
+          <div class="stars">
+            <span class="star-full">★</span>
+            <span class="star-full">★</span>
+            <span class="star-empty">★</span>
+          </div>
+          <span class="map-btn">↗ Maps</span>
+        </a>
+
+        <a class="place-item" href="maps://?q=Bonneville+Salt+Flats+Utah" target="_blank">
+          <span class="place-icon">🧂</span>
+          <div class="place-info"><div class="place-name">Bonneville Salt Flats</div></div>
+          <span class="map-btn">↗ Maps</span>
+        </a>
+
+        <a class="place-item" href="https://maps.apple.com/?address=4528%20West%201700%20S,%20Syracuse,%20UT%2084075,%20United%20States&auid=2332301418515237688&ll=40.945676,-112.206116&lsp=9902&q=Antelope%20Island%20State%20Park" target="_blank">
+          <span class="place-icon">🦬</span>
+          <div class="place-info"><div class="place-name">Antelope Island</div><div class="place-note">See Bisons</div></div>
+          <span class="map-btn">↗ Maps</span>
+        </a>
+
+      </div>
+
+      <!-- MIDWAY -->
+      <div id="utah-midway">
+        <div class="subsection-title">♨️ Midway</div>
+        <!-- place items here -->
+        <a class="place-item" href="maps://?q=Midway+Ice+Castles+Utah" target="_blank">
+          <span class="place-icon">♨️</span>
+          <div class="place-info"><div class="place-name">Homestead Crater hot spring</div></div>
+          <span class="map-btn">↗ Maps</span>
+        </a>
+        <a class="place-item" href="maps://?q=Midway+Ice+Castles+Utah" target="_blank">
+          <span class="place-icon">🧊</span>
+          <div class="place-info"><div class="place-name">Ice Castles, Pretty houses</div></div>
+          <span class="map-btn">↗ Maps</span>
+        </a>
+
+      </div>
+
+      <!-- MOAB -->
+      <div id="utah-moab">
+        <div class="subsection-title">🏜️ Moab</div>
+        <!-- place items here -->
+        <a class="place-item" href="maps://?q=Arches+National+Park+Utah" target="_blank">
+          <span class="place-icon">🪨</span>
+          <div class="place-info"><div class="place-name">Arches National Park</div><div class="place-note">Delicate Arch, Devils Garden to Landscape Arch, Double Arch, stargazing</div></div>
+          <span class="map-btn">↗ Maps</span>
+        </a>
+
+        <a class="place-item" href="maps://?q=Canyonlands+National+Park+Utah" target="_blank">
+          <span class="place-icon">🏜️</span>
+          <div class="place-info"><div class="place-name">Canyonlands National Park</div><div class="place-note">Island in the Sky (easy), Needles (remote), Dead Horse Point, Mesa Arch (TROU/VUE INCROYABLE - BEST SUNRISE ! no permit, short hike, 30-45' MIN before sunrise for parking/good spot, in island of the sky), Shafer Trail Road (4WD, no atv), atv rental?</div></div>
+          <span class="map-btn">↗ Maps</span>
+        </a>         
+         
+      </div>
+
+      <!-- MEXICAN HAT -->
+      <div id="utah-mexican-hat">
+        <div class="subsection-title">👒 Mexican Hat</div>
+        <!-- place items here -->
+
+        <a class="place-item" href="maps://?q=Valley+of+the+Gods+Utah" target="_blank">
+          <span class="place-icon">🗿</span>
+          <div class="place-info"><div class="place-name">Valley of the Gods</div><div class="place-note">Similar Monument Valley</div></div>
+          <span class="map-btn">↗ Maps</span>
+        </a>
+
+        <a class="place-item" href="maps://?q=Moki+Dugway+Utah" target="_blank">
+          <span class="place-icon">🚗</span>
+          <div class="place-info"><div class="place-name">Moki Dugway</div><div class="place-note">Scary steep road ⚠️ no cells ⚠️ check weather/rain- Muley Point overlook, Gooseneck State Park, Valley of the Gods</div></div>
+          <span class="map-btn">↗ Maps</span>
+        </a>
+
+        <a class="place-item" href="maps://?q=Natural+Bridges+National+Monument+Utah" target="_blank">
+          <span class="place-icon">🌉</span>
+          <div class="place-info"><div class="place-name">Natural Bridges National Monument</div></div>
+          <span class="map-btn">↗ Maps</span>
+        </a>        
+
+      </div>
+
+      <!-- HANKSVILLE - TORREY -->
+      <div id="utah-hanksville-torrey">
+        <div class="subsection-title">🏜️ Hanksville - Torrey</div>
+        <!-- place items here -->
+
+        <a class="place-item" href="maps://?q=Goblin+Valley+State+Park+Utah" target="_blank">
+          <span class="place-icon">👾</span>
+          <div class="place-info"><div class="place-name">Goblin Valley State Park</div></div>
+          <span class="map-btn">↗ Maps</span>
+        </a>
+
+        <a class="place-item" href="maps://?q=Little+Wild+Horse+Canyon+Utah" target="_blank">
+          <span class="place-icon">🐴</span>
+          <div class="place-info"><div class="place-name">Little Wild Horse Canyon</div><div class="place-note">Slot canyon hike, 3.5mi, easy</div></div>
+          <span class="map-btn">↗ Maps</span>
+        </a>
+
+        <a class="place-item" href="maps://?q=Capitol+Reef+National+Park+Utah" target="_blank">
+          <span class="place-icon">🏛️</span>
+          <div class="place-info"><div class="place-name">Capitol Reef National Park</div><div class="place-note">Scenic Drive, Cassidy Arch, Fruita Orchards</div></div>
+          <span class="map-btn">↗ Maps</span>
+        </a>    
+
+      </div>
+
+      <!-- BOULDER -->
+      <div id="utah-boulder">
+        <div class="subsection-title">🏜️ Boulder</div>
+        <!-- place items here -->
+
+        <a class="place-item" href="maps://?q=Scenic+Byway+12+Utah" target="_blank">
+          <span class="place-icon">🛣️</span>
+          <div class="place-info"><div class="place-name">Scenic Byway 12</div><div class="place-note">Boulder Mountain</div></div>
+          <span class="map-btn">↗ Maps</span>
+        </a>
+
+        <a class="place-item" href="maps://?q=Grand+Staircase+Escalante+National+Monument+Utah" target="_blank">
+          <span class="place-icon">🌄</span>
+          <div class="place-info"><div class="place-name">Grand Staircase Escalante National Monument</div><div class="place-note">AWD ? - Hole-in-the-Rock Road, Peek-a-Boo and spooky gulch slot canyon 3.5mi non technical- depart Dry Fork Trailhead, Lower Calf Creek Falls 6mi 500ft el.g., Devil's Garden, escalamte river trail to escalante natural bridge 4mi river crossing flat Big Horn canyon (anteloppe mais moins bien et long et access bizarre) - Wild Camping</div></div>
+          <span class="map-btn">↗ Maps</span>
+        </a>
+             
+      </div>
+
+      <!-- KANAB - SPRINGDALE -->
+      <div id="utah-kanab-springdale">
+        <div class="subsection-title">🏜️ Kanab - Springdale</div>
+        <!-- place items here -->
+
+        <a class="place-item" href="maps://?q=Zion+National+Park+Utah" target="_blank">
+          <span class="place-icon">⛰️</span>
+          <div class="place-info"><div class="place-name">Zion National Park</div><div class="place-note">The Narrows, Angels Landing, Canyon Overlook, Angels Landing, The Subway (permit+maps?navigation system required, check flash flood forecast, "Top-down" 9miles + short rapelling gear needeed, "Bottom-Up" still streneous - permits : 1. apply for dates few months in advance 2.unclaimed permit dec/mar/jun/sept 15 3. Daily lottery 2 days in adavnce - Best season : fall?summer)</div></div>
+          <span class="map-btn">↗ Maps</span>
+        </a>         
+       
+        <a class="place-item" href="maps://?q=White+Pocket+Utah" target="_blank">
+          <span class="place-icon">🤍</span>
+          <div class="place-info"><div class="place-name">White Pocket - The Wave alternative</div><div class="place-note">Kanab area, 4WD or tour from Kanab/Page</div></div>
+          <span class="map-btn">↗ Maps</span>
+        </a>
+
+        <a class="place-item" href="maps://?q=The+Wave+Coyote+Buttes+Utah" target="_blank">
+          <span class="place-icon">🌊</span>
+          <div class="place-info"><div class="place-name">The Wave in Coyote Butte</div><div class="place-note">Permit required - daily lottery</div></div>
+          <span class="map-btn">↗ Maps</span>
+        </a>
+
+        <a class="place-item" href="maps://?q=Midway+Ice+Castles+Utah" target="_blank">
+          <span class="place-icon">🧊</span>
+          <div class="place-info"><div class="place-name">The Great Chamber</div><div class="place-note">Cave/dune - AWD/Jepp - tour or atv rental - Kanab- stargazing</div></div>
+          <span class="map-btn">↗ Maps</span>
+        </a>
+
+        <a class="place-item" href="maps://?q=Coral+Pink+Sand+Dunes+State+Park+Utah" target="_blank">
+          <span class="place-icon">🏖️</span>
+          <div class="place-info"><div class="place-name">Coral Pink Sand Dunes State Park</div></div>
+          <span class="map-btn">↗ Maps</span>
+        </a>
+
+        <a class="place-item" href="maps://?q=Coral+Pink+Sand+Dunes+State+Park+Utah" target="_blank">
+          <span class="place-icon">🏖️</span>
+          <div class="place-info"><div class="place-name">Chess Queen</div><div class="place-note">Cailloux forme de doigt</div></div>
+          <span class="map-btn">↗ Maps</span>
+        </a>
+
+        <a class="place-item" href="maps://?q=Red+Canyon+Peekaboo+Trail+Utah" target="_blank">
+          <span class="place-icon">🔴</span>
+          <div class="place-info"><div class="place-name">Red Canyon Peekaboo</div><div class="place-note">kind of Anteloppe</div></div>
+          <span class="map-btn">↗ Maps</span>
+        </a>
+
+        <a class="place-item" href="maps://?q=Inchworm+Arch+Utah" target="_blank">
+          <span class="place-icon">🐛</span>
+          <div class="place-info"><div class="place-name">Inchworm Arch</div></div>
+          <span class="map-btn">↗ Maps</span>
+        </a>
+
+        <a class="place-item" href="maps://?q=Belly+of+the+Dragon+Utah" target="_blank">
+          <span class="place-icon">🐉</span>
+          <div class="place-info"><div class="place-name">Belly of the Dragon</div><div class="place-note">Hike tunnel/grotto</div></div>
+          <span class="map-btn">↗ Maps</span>
+        </a>
+
+        <a class="place-item" href="maps://?q=Belly+of+the+Dragon+Utah" target="_blank">
+          <span class="place-icon">🐉</span>
+          <div class="place-info"><div class="place-name">Kanarra Falls</div><div class="place-note">Hike anteloppe waterfall ladders, Narrow alternative, 3.5mi 4h, ⚠️ permit required</div></div>
+          <span class="map-btn">↗ Maps</span>
+        </a>
+
+      </div>
+
+      <!-- OTHERS -->
+      <div id="utah-others">
+        <div class="subsection-title">🏜️ Others</div>
+        <!-- place items here -->
+         
+      </div>
+
+      <a class="place-item" href="maps://?q=Lake+Powell+Utah" target="_blank">
+        <span class="place-icon">🚣</span>
+        <div class="place-info"><div class="place-name">Lake Powell</div><div class="place-note">Kayak to Antelope Canyon</div></div>
+        <span class="map-btn">↗ Maps</span>
+      </a>
+
+      <a class="place-item" href="maps://?q=Glen+Canyon+National+Recreation+Area+Utah" target="_blank">
+        <span class="place-icon">🏞️</span>
+        <div class="place-info"><div class="place-name">Glen Canyon National Recreation Area</div><div class="place-note">Ferry, Kayak, Beach, Cathedral Wash, Overlook hike</div></div>
+        <span class="map-btn">↗ Maps</span>
+      </a>
+
+      <a class="place-item" href="maps://?q=Glen+Canyon+National+Recreation+Area+Utah" target="_blank">
+        <span class="place-icon">🏞️</span>
+        <div class="place-info"><div class="place-name">Wire Pass to Buckskin Gulch</div><div class="place-note">Slot canyon into crazy narrow slot canyon</div></div>
+        <span class="map-btn">↗ Maps</span>
+      </a>
+
+      <a class="place-item" href="maps://?q=Rainbow+Bridge+National+Monument+Utah" target="_blank">
+        <span class="place-icon">🌈</span>
+        <div class="place-info"><div class="place-name">Rainbow Bridge National Monument</div><div class="place-note">Also called Corona Arch</div></div>
+        <span class="map-btn">↗ Maps</span>
+      </a>
+
+      <a class="place-item" href="maps://?q=Cedar+Breaks+National+Monument+Utah" target="_blank">
+        <span class="place-icon">🔴</span>
+        <div class="place-info"><div class="place-name">Cedar Breaks National Monument</div></div>
+        <span class="map-btn">↗ Maps</span>
+      </a>
+
+      <a class="place-item" href="maps://?q=Vermilion+Cliffs+National+Monument+Utah" target="_blank">
+        <span class="place-icon">🏔️</span>
+        <div class="place-info"><div class="place-name">Vermilion Cliffs National Monument</div></div>
+        <span class="map-btn">↗ Maps</span>
+      </a>
+
+      <a class="place-item" href="maps://?q=Flaming+Gorge+Utah" target="_blank">
+        <span class="place-icon">🔥</span>
+        <div class="place-info"><div class="place-name">Flaming Gorge</div></div>
+        <span class="map-btn">↗ Maps</span>
+      </a>
+
+      <a class="place-item" href="maps://?q=Dinosaur+National+Monument+Utah" target="_blank">
+        <span class="place-icon">🦕</span>
+        <div class="place-info"><div class="place-name">Dinosaur National Monument</div></div>
+        <span class="map-btn">↗ Maps</span>
+      </a>
+
+      <a class="place-item" href="maps://?q=Timpanogos+Cave+National+Monument+Utah" target="_blank">
+        <span class="place-icon">🦇</span>
+        <div class="place-info"><div class="place-name">Timpanogos Cave</div></div>
+        <span class="map-btn">↗ Maps</span>
+      </a>
+
+      <a class="place-item" href="https://maps.apple.com/?address=Page,%20AZ%20%2086040,%20United%20States&auid=4096438387596355349&ll=36.897182,-111.441556&lsp=9902&q=Biidi%20the%20Arch" target="_blank">
+        <span class="place-icon">🌊</span>
+        <div class="place-info"><div class="place-name">Biidi the Arch</div><div class="place-note">Sand cave - Behind Shell parking</div></div>
+        <span class="map-btn">↗ Maps</span>
+      </a>
+
+      <a class="place-item" href="maps://?q=Big+Cottonwood+Canyon+Utah" target="_blank">
+        <span class="place-icon">⛷️</span>
+        <div class="place-info"><div class="place-name">Big Cottonwood Canyon</div><div class="place-note">Ski, Wasatch Mountains, Donut Fall (waterfall with ice)</div></div>
+        <span class="map-btn">↗ Maps</span>
+      </a>
+
+
+      <a class="place-item" href="maps://?q=Mystic+Hot+Springs+Utah" target="_blank">
+        <span class="place-icon">♨️</span>
+        <div class="place-info"><div class="place-name">Mystic Hot Springs</div></div>
+        <span class="map-btn">↗ Maps</span>
+      </a>
+
+      <a class="place-item" href="maps://?q=Fifth+Water+Hot+Springs+Utah" target="_blank">
+        <span class="place-icon">♨️</span>
+        <div class="place-info"><div class="place-name">Fifth Water Hot Springs</div></div>
+        <span class="map-btn">↗ Maps</span>
+      </a>
+
+      <a class="place-item" href="maps://?q=Temple+of+the+Sun+Capitol+Reef+Utah" target="_blank">
+        <span class="place-icon">☀️</span>
+        <div class="place-info"><div class="place-name">Temple of the Sun and Moon</div></div>
+        <span class="map-btn">↗ Maps</span>
+      </a>
+
+      <a class="place-item" href="maps://?q=Factory+Butte+Utah" target="_blank">
+        <span class="place-icon">🏭</span>
+        <div class="place-info"><div class="place-name">Factory Butte</div></div>
+        <span class="map-btn">↗ Maps</span>
+      </a>
+
+      <a class="place-item" href="maps://?q=Moonscape+Overlook+Utah" target="_blank">
+        <span class="place-icon">🌙</span>
+        <div class="place-info"><div class="place-name">Moonscape Overlook</div><div class="place-note">Hanksville area</div></div>
+        <span class="map-btn">↗ Maps</span>
+      </a>
+
+      <a class="place-item" href="maps://?q=Bentonite+Hills+Utah" target="_blank">
+        <span class="place-icon">🌈</span>
+        <div class="place-info"><div class="place-name">Bentonite Hills</div></div>
+        <span class="map-btn">↗ Maps</span>
+      </a>
+
+      <a class="place-item" href="maps://?q=Golden+Cathedral+Neon+Canyon+Utah" target="_blank">
+        <span class="place-icon">✨</span>
+        <div class="place-info"><div class="place-name">Golden Cathedral (Neon Canyon)</div><div class="place-note">Trou/arche, eau</div></div>
+        <span class="map-btn">↗ Maps</span>
+      </a>
+
+      <a class="place-item" href="maps://?q=Dead+Horse+Point+State+Park+Utah" target="_blank">
+        <span class="place-icon">🐴</span>
+        <div class="place-info"><div class="place-name">Potash Road Scenic Drive</div></div>
+        <span class="map-btn">↗ Maps</span>
+      </a>
+
+      <a class="place-item" href="https://maps.apple.com/?address=Springdale,%20UT,%20%C3%89tats-Unis&auid=15877555850766951666&ll=37.194711,-112.997681&lsp=6489&q=Springdale" target="_blank">
+        <span class="place-icon">🐴</span>
+        <div class="place-info"><div class="place-name">Springdale</div></div>
+        <span class="map-btn">↗ Maps</span>
+      </a>
+
+      <a class="place-item" href="https://maps.apple.com/?address=Forest%20Service%20Road%2054,%20Hyrum,%20UT%20%2084319,%20United%20States&auid=7669724410706414783&ll=41.599687,-111.566634&lsp=9902&q=Hardware%20Ranch%20WMA" target="_blank">
+        <span class="place-icon">🐴</span>
+        <div class="place-info"><div class="place-name">Hardware ranch Elk viewing</div><div class="place-note">Elk migration, Sleigh</div></div>
+        <span class="map-btn">↗ Maps</span>
+      </a>
+
+    </div>
+  </div>
+
+  <!--------------------------------------------         --------------------------------------------->
+  <!-------------------------------------------- ARIZONA --------------------------------------------->
+  <!--------------------------------------------         --------------------------------------------->
+
+  <div class="state-section arizona" id="arizona">
+    <div class="state-header">
+      <div class="state-flag">☀️</div>
+      <div class="state-name">Arizona</div>
+      <div class="state-count">25 places</div>
+    </div>
+    <div class="places-list">
+
+      <a class="place-item" href="maps://?q=Grand+Canyon+National+Park+Arizona" target="_blank">
+        <span class="place-icon">🏜️</span>
+        <div class="place-info"><div class="place-name">Grand Canyon National Park</div><div class="place-note">+ North Rim, Colorado River canoe</div></div>
+        <span class="map-btn">↗ Maps</span>
+      </a>
+
+      <a class="place-item" href="maps://?q=Havasupai+Falls+Arizona" target="_blank">
+        <span class="place-icon">💙</span>
+        <div class="place-info"><div class="place-name">Havasupai Falls</div><div class="place-note">$455 permit - eau belle, tunnel hike, waqterfall, creek Havasu, Mooney, Beaver Falls</div></div>
+        <span class="map-btn">↗ Maps</span>
+      </a>
+
+      <a class="place-item" href="maps://?q=Sedona+Arizona" target="_blank">
+        <span class="place-icon">🔴</span>
+        <div class="place-info"><div class="place-name">Sedona, Coconino National Forest</div><div class="place-note">Devil's Hollows (aka soldier's pass cave, trou/grotte), Bear Mountain, Cathedral Rock (vue pillier rochers, steep hike), Robber's Roost (trou/vue, aka Hideout Cave / Shaman’s Cave), West Fork Trail (hike in water), Birthing Cave (⚠️ weird nav, download map), Little Horse Trail (vue cailloux), Mount Wilson (vue panoramique) Creeks, Devil's bridge from day creek road trailhead (arche). NOTE : trailheads fill out fast, Free shuttle</div></div>
+        <span class="map-btn">↗ Maps</span>
+      </a>
+
+      <a class="place-item" href="maps://?q=Salome+Jug+Arizona" target="_blank">
+        <span class="place-icon">🌀</span>
+        <div class="place-info"><div class="place-name">Salome Jug</div><div class="place-note">Swimming canyon, slot canyon, toboggan</div></div>
+        <span class="map-btn">↗ Maps</span>
+      </a>
+
+      <a class="place-item" href="maps://?q=Fossil+Creek+Arizona" target="_blank">
+        <span class="place-icon">🐚</span>
+        <div class="place-info"><div class="place-name">Fossil Creek</div><div class="place-note">No permits in winter</div></div>
+        <span class="map-btn">↗ Maps</span>
+      </a>
+
+      <a class="place-item" href="maps://?q=White+Mountains+Arizona" target="_blank">
+        <span class="place-icon">🏔️</span>
+        <div class="place-info"><div class="place-name">White Mountains</div></div>
+        <span class="map-btn">↗ Maps</span>
+      </a>
+
+      <a class="place-item" href="maps://?q=Woods+Canyon+Lake+Arizona" target="_blank">
+        <span class="place-icon">🌲</span>
+        <div class="place-info"><div class="place-name">Woods Canyon</div></div>
+        <span class="map-btn">↗ Maps</span>
+      </a>
+
+      <a class="place-item" href="maps://?q=West+Clear+Creek+Arizona" target="_blank">
+        <span class="place-icon">💧</span>
+        <div class="place-info"><div class="place-name">West Clear Creek</div><div class="place-note">→ Indian Maiden Falls, hike in water, toboggan</div></div>
+        <span class="map-btn">↗ Maps</span>
+      </a>
+
+      <a class="place-item" href="maps://?q=Verde+Canyon+Railroad+Arizona" target="_blank">
+        <span class="place-icon">🚂</span>
+        <div class="place-info"><div class="place-name">Verde Canyon Railroad</div></div>
+        <span class="map-btn">↗ Maps</span>
+      </a>
+
+      <a class="place-item" href="maps://?q=Apache+Trail+Scenic+Drive+Arizona" target="_blank">
+        <span class="place-icon">🛤️</span>
+        <div class="place-info"><div class="place-name">Apache Scenic Drive</div></div>
+        <span class="map-btn">↗ Maps</span>
+      </a>
+
+      <a class="place-item" href="maps://?q=Chiricahua+National+Monument+Arizona" target="_blank">
+        <span class="place-icon">🗿</span>
+        <div class="place-info"><div class="place-name">Chiricahuas</div><div class="place-note">Rock pinnacles</div></div>
+        <span class="map-btn">↗ Maps</span>
+      </a>
+
+      <a class="place-item" href="maps://?q=Inner+Basin+Trail+Arizona" target="_blank">
+        <span class="place-icon">🌿</span>
+        <div class="place-info"><div class="place-name">Inner Basin</div><div class="place-note">Foret de bouleau</div></div>
+        <span class="map-btn">↗ Maps</span>
+      </a>
+
+      <a class="place-item" href="maps://?q=Canyon+de+Chelly+National+Monument+Arizona" target="_blank">
+        <span class="place-icon">🏛️</span>
+        <div class="place-info"><div class="place-name">Canyon de Chelly National Monument</div></div>
+        <span class="map-btn">↗ Maps</span>
+      </a>
+
+      <a class="place-item" href="maps://?q=Petrified+Forest+National+Park+Arizona" target="_blank">
+        <span class="place-icon">🌲</span>
+        <div class="place-info"><div class="place-name">Petrified Forest / Painted Desert</div></div>
+        <span class="map-btn">↗ Maps</span>
+      </a>
+
+      <a class="place-item" href="maps://?q=Sunset+Crater+Volcano+National+Monument+Arizona" target="_blank">
+        <span class="place-icon">🌋</span>
+        <div class="place-info"><div class="place-name">Sunset Crater</div></div>
+        <span class="map-btn">↗ Maps</span>
+      </a>
+
+      <a class="place-item" href="maps://?q=Tonto+Natural+Bridge+State+Park+Arizona" target="_blank">
+        <span class="place-icon">🌉</span>
+        <div class="place-info"><div class="place-name">Tonto Natural Bridge</div></div>
+        <span class="map-btn">↗ Maps</span>
+      </a>
+
+      <a class="place-item" href="maps://?q=Cibecue+Falls+Arizona" target="_blank">
+        <span class="place-icon">💦</span>
+        <div class="place-info"><div class="place-name">Cibecue Falls</div><div class="place-note">Creek, waterfall, canyons</div></div>
+        <span class="map-btn">↗ Maps</span>
+      </a>
+
+      <a class="place-item" href="https://maps.apple.com/?address=Interstate%2040,%20Winslow,%20AZ%2086047,%20United%20States&auid=16843985641612750243&ll=35.033163,-111.021636&lsp=9902&q=Meteor%20Crater%20Visitor%20Center" target="_blank">
+        <span class="place-icon">☄️</span>
+        <div class="place-info"><div class="place-name">Meteor Crater / Homolovi</div></div>
+        <span class="map-btn">↗ Maps</span>
+      </a>
+
+      <a class="place-item" href="maps://?q=Antelope+Canyon+Arizona" target="_blank">
+        <span class="place-icon">🌊</span>
+        <div class="place-info"><div class="place-name">Antelope Canyon</div><div class="place-note">Page, AZ · Upper & Lower</div></div>
+        <span class="map-btn">↗ Maps</span>
+      </a>
+
+      <a class="place-item" href="maps://?q=Horseshoe+Bend+Arizona" target="_blank">
+        <span class="place-icon">🐴</span>
+        <div class="place-info"><div class="place-name">Horseshoe Bend</div></div>
+        <span class="map-btn">↗ Maps</span>
+      </a>
+
+      <a class="place-item" href="maps://?q=Seligman+Arizona+Route+66" target="_blank">
+        <span class="place-icon">🚗</span>
+        <div class="place-info"><div class="place-name">Seligman (Route 66)</div><div class="place-note">City that inspired Cars</div></div>
+        <span class="map-btn">↗ Maps</span>
+      </a>
+
+      <a class="place-item" href="maps://?q=Havasu+Falls+Arizona" target="_blank">
+        <span class="place-icon">🔵</span>
+        <div class="place-info"><div class="place-name">Havasu Falls / Mooney Falls</div></div>
+        <span class="map-btn">↗ Maps</span>
+      </a>
+
+     <a class="place-item" href="https://maps.apple.com/?address=406%20N%20Pipe%20Spring%20Rd,%20Fredonia,%20AZ%2086022,%20United%20States&auid=9360687340328900293&ll=36.862839,-112.739446&lsp=9902&q=Pipe%20Spring%20National%20Monument
+" target="_blank">
+        <span class="place-icon">🔵</span>
+        <div class="place-info"><div class="place-name">Pipe Spring National Monument</div></div>
+        <span class="map-btn">↗ Maps</span>
+      </a>
+
+      
+      <a class="place-item" href="maps://?q=Damsel+Falls+Cliff+Spa+Payson+Arizona" target="_blank">
+        <span class="place-icon">🌊</span>
+        <div class="place-info"><div class="place-name">Damsel Falls / Cliff Spa</div></div>
+        <span class="map-btn">↗ Maps</span>
+      </a>
+
+      <a class="place-item" href="maps://?q=Damsel+Falls+Cliff+Spa+Payson+Arizona" target="_blank">
+        <span class="place-icon">💎</span>
+        <div class="place-info"><div class="place-name">Glitter Mountain / Crytsal Mine</div><div class="place-note">Cailloux a ramasser - in Littlefield</div></div>
+        <span class="map-btn">↗ Maps</span>
+      </a>
+
+      <a class="place-item" href="maps://?q=Salome+Jug+Arizona" target="_blank">
+        <span class="place-icon">🌵</span>
+        <div class="place-info"><div class="place-name">Sagaro National Park</div><div class="place-note">Cactus, Tucson area</div></div>
+        <span class="map-btn">↗ Maps</span>
+      </a>
+
+
+
+    </div>
+  </div>
+
+  <!--------------------------------------------        --------------------------------------------->
+  <!-------------------------------------------- NEVADA --------------------------------------------->
+  <!--------------------------------------------        --------------------------------------------->
+
+  <div class="state-section nevada" id="nevada">
+    <div class="state-header">
+      <div class="state-flag">🎰</div>
+      <div class="state-name">Nevada</div>
+      <div class="state-count">3 places</div>
+    </div>
+    <div class="places-list">
+
+      <a class="place-item" href="maps://?q=Cathedral+Gorge+State+Park+Nevada" target="_blank">
+        <span class="place-icon">🏛️</span>
+        <div class="place-info"><div class="place-name">Cathedral Gorge State Park</div><div class="place-note">Moon caves (kind of brycee, very narrow canyon hike)</div></div>
+        <span class="map-btn">↗ Maps</span>
+      </a>
+
+      <a class="place-item" href="maps://?q=Ship+Rock+Nevada" target="_blank">
+        <span class="place-icon">⛵</span>
+        <div class="place-info"><div class="place-name">Ship Rock</div><div class="place-note">Near AZ/UT/NV/CO border</div></div>
+        <span class="map-btn">↗ Maps</span>
+      </a>
+
+      <a class="place-item" href="maps://?q=Area+51+Nevada" target="_blank">
+        <span class="place-icon">👽</span>
+        <div class="place-info"><div class="place-name">Area 51</div></div>
+        <span class="map-btn">↗ Maps</span>
+      </a>
+
+      <a class="place-item" href="maps://?q=Ship+Rock+Nevada" target="_blank">
+        <span class="place-icon">💎</span>
+        <div class="place-info"><div class="place-name">Garnet Hill - Crystal Mine</div><div class="place-note">In Ely</div></div>
+        <span class="map-btn">↗ Maps</span>
+      </a>
+
+    </div>
+  </div>
+
+  <!--------------------------------------------          --------------------------------------------->
+  <!-------------------------------------------- COLORADO --------------------------------------------->
+  <!--------------------------------------------          --------------------------------------------->
+
+  <div class="state-section colorado" id="colorado">
+    <div class="state-header">
+      <div class="state-flag">🏔️</div>
+      <div class="state-name">Colorado</div>
+      <div class="state-count">4 places</div>
+    </div>
+    <div class="places-list">
+
+      <a class="place-item" href="maps://?q=Canyons+of+the+Ancients+National+Monument+Colorado" target="_blank">
+        <span class="place-icon">🏺</span>
+        <div class="place-info"><div class="place-name">Canyons of the Ancients National Monument</div></div>
+        <span class="map-btn">↗ Maps</span>
+      </a>
+
+      <a class="place-item" href="maps://?q=Mesa+Verde+National+Park+Colorado" target="_blank">
+        <span class="place-icon">🦅</span>
+        <div class="place-info"><div class="place-name">Mesa Verde National Park</div></div>
+        <span class="map-btn">↗ Maps</span>
+      </a>
+
+      <a class="place-item" href="maps://?q=The+Cosmic+Ashtray+Colorado" target="_blank">
+        <span class="place-icon">🌌</span>
+        <div class="place-info"><div class="place-name">The Cosmic Ashtray</div></div>
+        <span class="map-btn">↗ Maps</span>
+      </a>
+
+      <a class="place-item" href="maps://?q=Colorado+River+Canoe" target="_blank">
+        <span class="place-icon">🛶</span>
+        <div class="place-info"><div class="place-name">Colorado River Canoe</div><div class="place-note">Grand Canyon area</div></div>
+        <span class="map-btn">↗ Maps</span>
+      </a>
+
+    </div>
+  </div>
+
+  <!--------------------------------------------       --------------------------------------------->
+  <!-------------------------------------------- IDAHO --------------------------------------------->
+  <!--------------------------------------------       --------------------------------------------->
+
+  <div class="state-section idaho" id="idaho">
+    <div class="state-header">
+      <div class="state-flag">🥔</div>
+      <div class="state-name">Idaho</div>
+      <div class="state-count">1 place</div>
+    </div>
+    <div class="places-list">
+
+      <a class="place-item" href="maps://?q=Lava+Hot+Springs+Idaho" target="_blank">
+        <span class="place-icon">♨️</span>
+        <div class="place-info"><div class="place-name">Lava Hot Springs</div><div class="place-note">Hot spring, ghost town, silo airbnb</div></div>
+        <span class="map-btn">↗ Maps</span>
+      </a>
+
+    </div>
+  </div>
+
+
+  <!--------------------------------------------          --------------------------------------------->
+  <!-------------------------------------------- ALASKA --------------------------------------------->
+  <!--------------------------------------------          --------------------------------------------->
+
+  <div class="state-section alaska" id="alaska">
+    <div class="state-header">
+      <div class="state-flag">🛶</div>
+      <div class="state-name">Alaska</div>
+      <div class="state-count">2 places</div>
+    </div>
+    <div class="places-list">
+
+      <a class="place-item" href="maps://?q=Canyons+of+the+Ancients+National+Monument+Colorado" target="_blank">
+        <span class="place-icon">🏺</span>
+        <div class="place-info"><div class="place-name">Katmai</div></div>
+        <span class="map-btn">↗ Maps</span>
+      </a>
+
+      <a class="place-item" href="maps://?q=Mesa+Verde+National+Park+Colorado" target="_blank">
+        <span class="place-icon">🦅</span>
+        <div class="place-info"><div class="place-name">Paddle in Glacier</div></div>
+        <span class="map-btn">↗ Maps</span>
+      </a>
+
+    </div>
+  </div>
+
+  <!--------------------------------------------            --------------------------------------------->
+  <!-------------------------------------------- CALIFORNIA --------------------------------------------->
+  <!--------------------------------------------            --------------------------------------------->
+
+  <div class="state-section california" id="california">
+    <div class="state-header">
+      <div class="state-flag">🏄🏻</div>
+      <div class="state-name">California</div>
+      <div class="state-count">2 places</div>
+    </div>
+    <div class="places-list">
+
+      <a class="place-item" href="maps://?q=Canyons+of+the+Ancients+National+Monument+Colorado" target="_blank">
+        <span class="place-icon">🏺</span>
+        <div class="place-info"><div class="place-name">Mamoth Lakes</div></div>
+        <span class="map-btn">↗ Maps</span>
+      </a>
+
+      <a class="place-item" href="maps://?q=Mesa+Verde+National+Park+Colorado" target="_blank">
+        <span class="place-icon">🦅</span>
+        <div class="place-info"><div class="place-name">Alabama Hills</div><div class="place-note">Plage galet verre, north cali</div></div>
+        <span class="map-btn">↗ Maps</span>
+      </a>
+
+    </div>
+  </div>
+
+  <!--------------------------------------------            --------------------------------------------->
+  <!-------------------------------------------- RESSOURCES --------------------------------------------->
+  <!--------------------------------------------            --------------------------------------------->
+
+  <div class="state-section ressources" id="ressources">
+    <div class="state-header">
+      <div class="state-flag">📔</div>
+      <div class="state-name">Ressources</div>
+    </div>
+    <div class="places-list">
+
+
+      <a class="place-item" href="https://www.onxmaps.com/offroad/app?utm_source=google&utm_medium=cpc&utm_campaign=9685756278&gad_source=1&gad_campaignid=9685756278&gbraid=0AAAAACuoPXF8ggdifLiniqFjwXQBZc-MR&gclid=EAIaIQobChMIjdbW9K7slAMVVxKtBh0deSmUEAAYASAAEgIFJ_D_BwE" target="_blank">
+        <span class="place-icon">📱</span>
+        <div class="place-info"><div class="place-name">ONx Offroad</div><div class="place-note">campsites, car trails... - free doesnt give a lot, 7day free trail, membership $35/year</div></div>
+        <span class="map-btn">↗ Link</span>
+      </a>
+
+      <a class="place-item" href="https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://apps.apple.com/us/app/ioverlander/id1486556203&ved=2ahUKEwiKkOb_sOyUAxUnGDQIHdNTPbEQFnoECBwQAQ&usg=AOvVaw24cBOExiEWk86NJ8u1gPwL" target="_blank">
+        <span class="place-icon">📱</span>
+        <div class="place-info"><div class="place-name">iOverlander2 App</div><div class="place-note">Find campsites and shows their amenities - Wifi offline - free limits downloading or pay $7/month</div></div>
+        <span class="map-btn">↗ Link</span>
+      </a>
+
+      <a class="place-item" href="https://katieandjoeonthego.com" target="_blank">
+        <span class="place-icon">🌐</span>
+        <div class="place-info"><div class="place-name">Katie and joe on the go</div><div class="place-note">Throughout usa / national parks</div></div>
+        <span class="map-btn">↗ Link</span>
+      </a>
+
+      <a class="place-item" href="https://www.instagram.com/cayleighanddavid/?hl=fr" target="_blank">
+        <span class="place-icon">🌐</span>
+        <div class="place-info"><div class="place-name">Cayleigh and david</div><div class="place-note">Instagram only</div></div>
+        <span class="map-btn">↗ Link</span>
+      </a>
+
+      <a class="place-item" href="https://utahguide.com" target="_blank">
+        <span class="place-icon">🌐</span>
+        <div class="place-info"><div class="place-name">Utah guide</div><div class="place-note">By Adventure family vlog</div></div>
+        <span class="map-btn">↗ Link</span>
+      </a>
+
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  Open this page on your iPhone or iPad · Tap "↗ Maps" to navigate directly in Apple Maps<br>
+  Created by Lisa Duperray 🌺
+</footer>
+
+<a href="#" id="topBtn">↑ Top</a>
+
+<script>
+  const btn = document.getElementById('topBtn');
+  window.onscroll = () => {
+    btn.style.display = window.scrollY > 300 ? 'flex' : 'none';
+  };
+</script>
+
+<script>
+  function toggleSub(id, e) {
+    e.preventDefault();
+    document.querySelectorAll('.subsection-nav').forEach(el => {
+      if (el.id === id) {
+        el.classList.toggle('open');
+      } else {
+        el.classList.remove('open');
+      }
+    });
+  }
+</script>
+
+</body>
+</html>
