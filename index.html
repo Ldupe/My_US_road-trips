@@ -420,7 +420,7 @@
   <a href="#idaho"      onclick="toggleSub('sub-idaho')"      >🥔 Idaho</a>
   <a href="#alaska"     onclick="toggleSub('sub-alaska')"     >🛶 Alaska</a>
   <a href="#california" onclick="toggleSub('sub-california')" >🏄 California</a>
-  <a href="#ressources" onclick="toggleSub('sub-ressources')" >📔 Resources</a>
+  <a onclick="toggleSub('sub-ressources', event)" >📔 Resources</a>
 </div>
 
 <!-- one subsection bar per state, hidden by default -->
@@ -440,13 +440,20 @@
 
 <div class="subsection-nav" id="sub-arizona">
   <a href="#arizona">🏜️ See all</a>
-  <a href="#arizona-page">🏜️ Page</a>
-  <a href="#arizona-flagstaff">💧 Flagstaff</a>
+  <a href="#arizona-page">🌅 Page</a>
+  <a href="#arizona-flagstaff">🌲 Flagstaff</a>
   <a href="#arizona-sedona">🔴 Sedona</a>
-  <a href="#arizona-others">🔴 Others</a>
+  <a href="#arizona-others">🏜️ Others</a>
 </div>
 
 <!-- add more per state as needed -->
+
+<div class="subsection-nav" id="sub-ressources">
+  <a href="#ressources">📔 See all</a>
+  <a href="#ressources-van">🚐 Van related</a>
+  <a href="#ressources-camping">⛺ Camping / Offroad</a>
+  <a href="#ressources-tourism">🗺️ Tourism</a>
+</div>
 
 <div class="container">
 
@@ -470,37 +477,13 @@
         <!-- place items here -->
 
         <div class="place-item">
-          <span class="place-icon">🌀</span>
-          <div class="place-info"><div class="place-name"><a class="place-link" href="https://maps.apple.com/?address=Howell,%20UT%20%2084316,%20United%20States&auid=3617351628495618246&ll=41.437655,-112.668861&lsp=9902&q=Spiral%20Jetty" target="_blank">Spiral Jetty</a></div><div class="place-note">See / swim Pink lake and salt flats, Train Monument</div></div>
-          <div class="stars">
-            <span class="star-full">★</span>
-            <span class="star-full">★</span>
-            <span class="star-empty">★</span>
-          </div>
-        
-          <div class="place-controls">
-            <div class="stars">
-              <span class="star-empty">★</span>
-              <span class="star-empty">★</span>
-              <span class="star-empty">★</span>
-            </div>
-            <select class="status-select unknown" data-id="spiral-jetty" onchange="saveStatus(this)">
-              <option value="unknown">?</option>
-              <option value="planned">Planned</option>
-              <option value="notplanned">Not Planned</option>
-              <option value="visited">Visited !</option>
-            </select>
-          </div>
-      </div>
-
-        <div class="place-item">
           <span class="place-icon">🧂</span>
           <div class="place-info"><div class="place-name"><a class="place-link" href="maps://?q=Bonneville+Salt+Flats+Utah" target="_blank">Bonneville Salt Flats</a></div></div>
         
           <div class="place-controls">
             <div class="stars">
-              <span class="star-empty">★</span>
-              <span class="star-empty">★</span>
+              <span class="star-full">★</span>
+              <span class="star-full">★</span>
               <span class="star-empty">★</span>
             </div>
             <select class="status-select unknown" data-id="bonneville-salt-flats" onchange="saveStatus(this)">
@@ -523,6 +506,25 @@
               <span class="star-empty">★</span>
             </div>
             <select class="status-select unknown" data-id="antelope-island" onchange="saveStatus(this)">
+              <option value="unknown">?</option>
+              <option value="planned">Planned</option>
+              <option value="notplanned">Not Planned</option>
+              <option value="visited">Visited !</option>
+            </select>
+          </div>
+      </div>
+
+      <div class="place-item">
+          <span class="place-icon">🌀</span>
+          <div class="place-info"><div class="place-name"><a class="place-link" href="https://maps.apple.com/?address=Howell,%20UT%20%2084316,%20United%20States&auid=3617351628495618246&ll=41.437655,-112.668861&lsp=9902&q=Spiral%20Jetty" target="_blank">Spiral Jetty</a></div><div class="place-note">See / swim Pink lake and salt flats, Train Monument</div></div>
+        
+          <div class="place-controls">
+            <div class="stars">
+              <span class="star-empty">★</span>
+              <span class="star-empty">★</span>
+              <span class="star-empty">★</span>
+            </div>
+            <select class="status-select unknown" data-id="spiral-jetty" onchange="saveStatus(this)">
               <option value="unknown">?</option>
               <option value="planned">Planned</option>
               <option value="notplanned">Not Planned</option>
@@ -1412,6 +1414,10 @@
     </div>
     <div class="places-list">
 
+      <!-- PAGE -->
+      <div id="arizona-page">
+        <div class="subsection-title">🌅 Page</div>
+
       <div class="place-item">
         <span class="place-icon">🏜️</span>
         <div class="place-info"><div class="place-name"><a class="place-link" href="maps://?q=Grand+Canyon+National+Park+Arizona" target="_blank">Grand Canyon National Park</a></div><div class="place-note">+ North Rim, Colorado River canoe</div></div>
@@ -1468,6 +1474,12 @@
             </select>
           </div>
       </div>
+
+      </div><!-- end arizona-flagstaff -->
+
+      <!-- SEDONA -->
+      <div id="arizona-sedona">
+        <div class="subsection-title">🔴 Sedona</div>
 
       <div class="place-item">
         <span class="place-icon">🌀</span>
@@ -1582,6 +1594,12 @@
             </select>
           </div>
       </div>
+
+      </div><!-- end arizona-sedona -->
+
+      <!-- OTHERS -->
+      <div id="arizona-others">
+        <div class="subsection-title">🏜️ Others</div>
 
       <div class="place-item">
         <span class="place-icon">🛤️</span>
@@ -1792,6 +1810,12 @@
           </div>
       </div>
 
+      </div><!-- end arizona-page -->
+
+      <!-- FLAGSTAFF -->
+      <div id="arizona-flagstaff">
+        <div class="subsection-title">🌲 Flagstaff</div>
+
       <div class="place-item">
         <span class="place-icon">🚗</span>
         <div class="place-info"><div class="place-name"><a class="place-link" href="maps://?q=Seligman+Arizona+Route+66" target="_blank">Seligman (Route 66)</a></div><div class="place-note">City that inspired Cars</div></div>
@@ -1910,6 +1934,7 @@
 
 
 
+      </div><!-- end arizona-others -->
     </div>
   </div>
 
@@ -2248,6 +2273,9 @@
 
     <div class="places-list">
 
+      <!-- VAN RELATED -->
+      <div id="ressources-van">
+        <div class="subsection-title">🚐 Van related</div>
 
       <div class="place-item">
         <span class="place-icon">📱</span>
@@ -2287,6 +2315,12 @@
           </div>
       </div>
 
+      </div><!-- end ressources-van -->
+
+      <!-- CAMPING / OFFROAD RELATED -->
+      <div id="ressources-camping">
+        <div class="subsection-title">⛺ Camping / Offroad related</div>
+
       <div class="place-item">
         <span class="place-icon">🌐</span>
         <div class="place-info"><div class="place-name"><a class="place-link" href="https://katieandjoeonthego.com" target="_blank">Katie and joe on the go</a></div><div class="place-note">Throughout usa / national parks</div></div>
@@ -2305,6 +2339,12 @@
             </select>
           </div>
       </div>
+
+      </div><!-- end ressources-camping -->
+
+      <!-- TOURISM RELATED -->
+      <div id="ressources-tourism">
+        <div class="subsection-title">🗺️ Tourism related</div>
 
       <div class="place-item">
         <span class="place-icon">🌐</span>
@@ -2348,6 +2388,7 @@
       https://indiecampers.com/files/vehicle_guides/en/conquest.pdf
       -->
 
+      </div><!-- end ressources-tourism -->
     </div>
   </div>
 
